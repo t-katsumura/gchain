@@ -3,14 +3,9 @@
 [![GoDoc](https://godoc.org/github.com/t-katsumura/gchain?status.svg)](http://godoc.org/github.com/t-katsumura/gchain)
 [![Go Report Card](https://goreportcard.com/badge/github.com/t-katsumura/gchain)](https://goreportcard.com/report/github.com/t-katsumura/gchain)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
-[![Lint](http://gocover.io/_badge/github.com/t-katsumura/gchain)](http://gocover.io/github.com/t-katsumura/gchain)
-[![Test](http://gocover.io/_badge/github.com/t-katsumura/gchain)](http://gocover.io/github.com/t-katsumura/gchain)
-[![godoc][godoc-img]][godoc]
-[![goreport][report-img]][report]
-[![build][build-img]][build]
-[![coverage][cov-img]][cov]
-![stability-stable][stability-img]
-[![Coverage](http://gocover.io/_badge/github.com/t-katsumura/gchain)](http://gocover.io/github.com/t-katsumura/gchain)
+[![Lint](https://github.com/t-katsumura/gchain/actions/workflows/lint.yml/badge.svg?branch=main)](https://github.com/t-katsumura/gchain/actions/workflows/lint.yml?query=branch%3Amain)
+[![Test](https://github.com/t-katsumura/gchain/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/t-katsumura/gchain/actions/workflows/test.yml?query=branch%3Amain)
+[![Coverage](https://gocover.io/_badge/github.com/t-katsumura/gchain)](https://gocover.io/github.com/t-katsumura/gchain)
 [![GitHub release](https://img.shields.io/github/release/t-katsumura/gchain/all.svg?style=flat-square)](https://github.com/t-katsumura/gchain/releases)
 
 
