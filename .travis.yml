@@ -3,9 +3,6 @@ language: go
 go:
   - 1.18.x
 
-git:
-  depth: 1
-
 install: true
 
 notifications:
