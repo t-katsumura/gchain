@@ -6,10 +6,6 @@ on:
     branches:
       - master
       - main
-  push:
-    branches:
-      - master
-      - main
   pull_request:
 permissions:
   contents: read
