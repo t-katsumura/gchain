@@ -13,7 +13,7 @@ permissions:
   # pull-requests: read
 jobs:
   golangci:
-    name: lint
+    name: codeql
     runs-on: ubuntu-latest
     permissions:
       security-events: write
