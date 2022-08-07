@@ -1,4 +1,4 @@
-name: Continuous Integration
+name: Lint
 on:
   push:
     tags:
@@ -13,7 +13,7 @@ permissions:
   # pull-requests: read
 jobs:
   golangci:
-    name: test
+    name: lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/setup-go@v3
@@ -45,7 +45,3 @@ jobs:
 
           # Optional: if set to true then the action don't cache or restore ~/.cache/go-build.
           # skip-build-cache: true
-      # - name: Build
-      #   run: go build -v
-      - name: Test
-        run: go test -v -cover ./...
