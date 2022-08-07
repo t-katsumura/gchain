@@ -1,0 +1,19 @@
+language: go
+
+go:
+  - 1.18.x
+
+git:
+  depth: 1
+
+install: true
+
+notifications:
+  email: false
+
+before_script:
+  - curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin 
+
+script:
+  - golangci-lint run
+  - go test -v -race ./...
