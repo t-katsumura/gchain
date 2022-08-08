@@ -54,10 +54,10 @@ jobs:
       - name: Test
         run: go test -v -cover ./...
 
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v2
-        with:
-          languages: go
+      # - name: Initialize CodeQL
+      #   uses: github/codeql-action/init@v2
+      #   with:
+      #     languages: go
 
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v2
+      # - name: Perform CodeQL Analysis
+      #   uses: github/codeql-action/analyze@v2
