@@ -15,6 +15,10 @@ jobs:
   golangci:
     name: Test
     runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      actions: read
+      contents: read
     steps:
       - uses: actions/setup-go@v3
         with:
