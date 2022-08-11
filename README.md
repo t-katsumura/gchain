@@ -61,6 +61,7 @@ func secondHandler(next http.Handler) http.Handler {
         next.ServeHTTP(w, r)
     })
 }
+
 func thirdHandler(w http.ResponseWriter, _ *http.Request) {
     w.Write([]byte("Hi from third handler\n"))
 }
