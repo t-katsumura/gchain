@@ -13,6 +13,7 @@
 *.out
 *.htm
 *.html
+*.xml
 *.txt
 
 # Go workspace file
