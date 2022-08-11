@@ -52,7 +52,14 @@ jobs:
           # skip-build-cache: true
 
       - name: Test
-        run: go test -v -cover ./...
+        run: go test -v -cover -covermode=atomic -coverprofile=overage.xml ./...
+
+      - name: Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          flags: unittests
+          fail_ci_if_error: true
+          verbose: true
 
       # - name: Initialize CodeQL
       #   uses: github/codeql-action/init@v2
