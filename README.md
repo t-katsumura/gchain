@@ -23,13 +23,22 @@ gchain makes it like
 chain = gchain.NewChainXtoX(firstFunc, secondFunc, thirdFunc).Chain(finalFunc)
 ```
 
+or
+
+```go
+chain = gchain.NewChainXtoX(firstFunc).
+    Append(secondFunc).
+    Append(thirdFunc).
+    Chain(finalFunc)
+```
+
 ## Example
 
 This is an example of gchain.
 
 It creating http handler with using gchain (`handler2`, `handler3`) and without using gchain (`handler1`).
 
-```
+```go
 package main
 
 import (
@@ -85,7 +94,7 @@ All bug reports, questions and suggestions should go though Github Issues.
 1. Create feature branch (`git checkout -b feature/new-feature`)
 1. Write codes on feature branch
 1. Commit your changes (`git commit -m "Added new feature"`)
-1. Push to the branch (`git push origin feature/new-feature`)
+1. Push to the branch (`git push -u origin feature/new-feature`)
 1. Create new Pull Request on Github
 
 ## Development
