@@ -88,6 +88,31 @@ func main() {
 }
 ```
 
+## Structs
+
+Structs' name is in the format of `ChainXYZAtoX`.  
+Here, `X`, `Y`, `Z`, `A` represents a Type.  
+`A` means a variable length array.  
+`XYZA` is arguments and the `X` is the type of returned value.  
+
+```go
+// when using ChainXYZAtoX
+// the following format of functions are expected
+func(x X, y Y, z Z, a ...A) X
+```
+
+```go
+// when using ChainXYZA
+// the following format of functions are expected
+func(x X, y Y, z Z, a ...A)
+```
+
+```go
+// when using ChainXYZ
+// the following format of functions are expected
+func(x X, y Y, z Z)
+```
+
 ## Questions and support
 All bug reports, questions and suggestions should go though Github Issues.
 
