@@ -37,12 +37,6 @@ chain = gchain.NewChainXtoX(firstFunc).
 ## Installation
 
 ```
-go install github.com/t-katsumura/gchain@latest
-```
-
-or 
-
-```
 go get github.com/t-katsumura/gchain@latest
 ```
 
