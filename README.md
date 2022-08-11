@@ -33,6 +33,21 @@ chain = gchain.NewChainXtoX(firstFunc).
     Chain(finalFunc)
 ```
 
+## Installation
+
+```
+go install github.com/t-katsumura/gchain@latest
+```
+
+or 
+
+```
+go get github.com/t-katsumura/gchain@latest
+```
+
+## Usage
+
+
 ## Example
 
 This is an example of gchain.
