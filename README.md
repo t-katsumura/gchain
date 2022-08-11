@@ -5,7 +5,8 @@
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 [![Test](https://github.com/t-katsumura/gchain/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/t-katsumura/gchain/actions/workflows/test.yml?query=branch%3Amain)
 [![Codecov](https://codecov.io/gh/t-katsumura/gchain/branch/main/graph/badge.svg?token=P5J4J1F6RN)](https://codecov.io/gh/t-katsumura/gchain)
-[![GitHub release](https://img.shields.io/github/release/t-katsumura/gchain/all.svg?style=flat-square)](https://github.com/t-katsumura/gchain/releases)
+<!-- [![Coverage](https://gocover.io/_badge/github.com/t-katsumura/gchain)](https://gocover.io/github.com/t-katsumura/gchain) -->
+<!-- [![GitHub release](https://img.shields.io/github/release/t-katsumura/gchain/all.svg?style=flat-square)](https://github.com/t-katsumura/gchain/releases) -->
 
 
 gchain is a simple go library for creation of generalized method chain.
