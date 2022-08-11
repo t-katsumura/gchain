@@ -20,7 +20,8 @@ chain = firstFunc(secondFunc(thirdFunc(finalFunc)))
 gchain makes it like
 
 ```go
-chain = gchain.NewChainXtoX(firstFunc, secondFunc, thirdFunc).Chain(finalFunc)
+chain = gchain.NewChainXtoX(firstFunc, secondFunc, thirdFunc).
+    Chain(finalFunc)
 ```
 
 or
@@ -42,47 +43,47 @@ It creating http handler with using gchain (`handler2`, `handler3`) and without 
 package main
 
 import (
-	"net/http"
+    "net/http"
 
-	"github.com/t-katsumura/gchain"
+    "github.com/t-katsumura/gchain"
 )
 
 func firstHandler(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("Hi from first handler\n"))
-		next.ServeHTTP(w, r)
-	})
+    return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+        w.Write([]byte("Hi from first handler\n"))
+        next.ServeHTTP(w, r)
+    })
 }
 
 func secondHandler(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("Hi from second handler\n"))
-		next.ServeHTTP(w, r)
-	})
+    return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+        w.Write([]byte("Hi from second handler\n"))
+        next.ServeHTTP(w, r)
+    })
 }
 func thirdHandler(w http.ResponseWriter, _ *http.Request) {
-	w.Write([]byte("Hi from third handler\n"))
+    w.Write([]byte("Hi from third handler\n"))
 }
 
 func main() {
-	// Not using gchain
-	handler1 := firstHandler(secondHandler(http.HandlerFunc(thirdHandler)))
+    // Not using gchain
+    handler1 := firstHandler(secondHandler(http.HandlerFunc(thirdHandler)))
 
-	// Using gchain
-	handler2 := gchain.NewChainXtoX(firstHandler, secondHandler).
-		Chain(http.HandlerFunc(thirdHandler))
+    // Using gchain
+    handler2 := gchain.NewChainXtoX(firstHandler, secondHandler).
+        Chain(http.HandlerFunc(thirdHandler))
 
-	// Using gchain
-	chain := gchain.NewChainXtoX[http.Handler]()
-	chain.Append(firstHandler)
-	chain.Append(secondHandler)
-	handler3 := chain.Chain(http.HandlerFunc(thirdHandler))
+    // Using gchain
+    chain := gchain.NewChainXtoX[http.Handler]()
+    chain.Append(firstHandler)
+    chain.Append(secondHandler)
+    handler3 := chain.Chain(http.HandlerFunc(thirdHandler))
 
     // Run http server with handler1, handler2, handler3
-	http.Handle("/h1", handler1)
-	http.Handle("/h2", handler2)
-	http.Handle("/h3", handler3)
-	http.ListenAndServe(":8080", nil)
+    http.Handle("/h1", handler1)
+    http.Handle("/h2", handler2)
+    http.Handle("/h3", handler3)
+    http.ListenAndServe(":8080", nil)
 }
 ```
 
