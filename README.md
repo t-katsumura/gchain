@@ -5,12 +5,12 @@
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 [![Test](https://github.com/t-katsumura/gchain/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/t-katsumura/gchain/actions/workflows/test.yml?query=branch%3Amain)
 [![Codecov](https://codecov.io/gh/t-katsumura/gchain/branch/main/graph/badge.svg?token=P5J4J1F6RN)](https://codecov.io/gh/t-katsumura/gchain)
-<!-- [![Coverage](https://gocover.io/_badge/github.com/t-katsumura/gchain)](https://gocover.io/github.com/t-katsumura/gchain) -->
-<!-- [![GitHub release](https://img.shields.io/github/release/t-katsumura/gchain/all.svg?style=flat-square)](https://github.com/t-katsumura/gchain/releases) -->
 
+Crate a method chain using Generics in Go.  
+Any types of method can be chained.
 
-gchain is a simple go library for creation of generalized method chain.
-Any types of method chain can be created using gchain which is utilizing go Generics.
+> **Warning**
+> Generics is introduced since go 1.18.
 
 In particular, when creating method chain, it usually becomes
 
@@ -18,20 +18,20 @@ In particular, when creating method chain, it usually becomes
 chain = firstFunc(secondFunc(thirdFunc(finalFunc)))
 ```
 
-gchain makes it like
+gchain makes it simple
 
 ```go
 chain = gchain.NewChainXtoX(firstFunc, secondFunc, thirdFunc).
-    Chain(finalFunc)
+        Chain(finalFunc)
 ```
 
 or
 
 ```go
 chain = gchain.NewChainXtoX(firstFunc).
-    Append(secondFunc).
-    Append(thirdFunc).
-    Chain(finalFunc)
+        Append(secondFunc).
+        Append(thirdFunc).
+        Chain(finalFunc)
 ```
 
 ## Installation
@@ -42,12 +42,43 @@ go get github.com/t-katsumura/gchain@latest
 
 ## Usage
 
+**Create a new chain**
+
+Create a new chain.  
+Foe example, when creating $x_{n+1} = f^{(n)}(x_{n})$ types of chaining
+
+```go
+// create an empty chain
+chain := gchain.NewChainXtoX()
+
+or
+
+// create a chain with methods
+chain := gchain.NewChainXtoX(f1, f2, f3)
+```
+
+**Add some methods to the chain**
+
+Adding methods to the chain.
+
+```go
+chain.Append(f1)
+chain.Append(f2)
+```
+
+**Get the method chain**
+
+Get the method chain.
+
+```go
+method_chain := chain.Chain(x0)
+```
 
 ## Example
 
-This is an example of gchain.
+This is an example.
 
-It creating http handler with using gchain (`handler2`, `handler3`) and without using gchain (`handler1`).
+It creates middleware chain for http server.
 
 ```go
 package main
@@ -77,56 +108,54 @@ func thirdHandler(w http.ResponseWriter, _ *http.Request) {
 }
 
 func main() {
-    // Not using gchain
-    handler1 := firstHandler(secondHandler(http.HandlerFunc(thirdHandler)))
 
-    // Using gchain
-    handler2 := gchain.NewChainXtoX(firstHandler, secondHandler).
-        Chain(http.HandlerFunc(thirdHandler))
+    // this handler is the same as firstHandler(secondHandler(thirdHandler))
+	handler := gchain.NewChainXtoX(secondHandler, firstHandler).
+		Chain(http.HandlerFunc(thirdHandler))
 
-    // Using gchain
-    chain := gchain.NewChainXtoX[http.Handler]()
-    chain.Append(firstHandler)
-    chain.Append(secondHandler)
-    handler3 := chain.Chain(http.HandlerFunc(thirdHandler))
+    // This server returns
+    //     Hi from first handler
+    //     Hi from second handler
+    //     Hi from third handler
+	http.ListenAndServe(":8080", handler)
 
-    // Run http server with handler1, handler2, handler3
-    http.Handle("/h1", handler1)
-    http.Handle("/h2", handler2)
-    http.Handle("/h3", handler3)
-    http.ListenAndServe(":8080", nil)
 }
 ```
 
 ## Structs
 
 Structs' name is in the format of `ChainXYZAtoX`.  
-Here, `X`, `Y`, `Z`, `A` represents a Type.  
-`A` means a variable length array.  
-`XYZA` is arguments and the `X` is the type of returned value.  
+Here, `X`, `Y`, `Z`, `A` represents a Data Type.`A` means an array.  
+`XYZA` is arguments and the `X` is the type of returned value.
+
+This means `ChainXYZAtoX` is equivalent to the following equation.
+
+$x_{i+1} = f^{(i)}(x_{i}, y, z, a)$
 
 ```go
 // when using ChainXYZAtoX
-// the following format of functions are expected
+// methods must have the following signature
 func(x X, y Y, z Z, a ...A) X
 ```
 
 ```go
 // when using ChainXYZA
-// the following format of functions are expected
+// methods must have the following signature
 func(x X, y Y, z Z, a ...A)
 ```
 
 ```go
 // when using ChainXYZ
-// the following format of functions are expected
+// methods must have the following signature
 func(x X, y Y, z Z)
 ```
 
 ## Questions and support
+
 All bug reports, questions and suggestions should go though Github Issues.
 
 ## Contributing
+
 1. Fork it
 1. Create feature branch (`git checkout -b feature/new-feature`)
 1. Write codes on feature branch
@@ -135,6 +164,7 @@ All bug reports, questions and suggestions should go though Github Issues.
 1. Create new Pull Request on Github
 
 ## Development
+
 - Write codes
-- `go fmt -x  ./...` - format codes
+- `go fmt -x ./...` - format codes
 - `go test -v -cover ./...` - run test and the coverage should always be 100%
